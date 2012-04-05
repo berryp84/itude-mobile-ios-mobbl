@@ -122,11 +122,11 @@
 
 -(void) updateMatrixCells:(NSArray*) cells {
 	for(MBMatrixCell *matrixCell in cells) {
-		// Added the visibility check for performance. Invisible cells don't have to be updated
-		if (!matrixCell.hidden) {
-			[matrixCell updateValue];
-			[self styleMatrixCell: matrixCell];
-		}
+        // Update all cells. Also the hidden ones. Otherwise coloring will not appear. BINCKRETAILSLA-211
+        //if (!matrixCell.hidden) {
+            [matrixCell updateValue];
+            [self styleMatrixCell: matrixCell];
+		//}
 	}
 }
 
