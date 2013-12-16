@@ -223,12 +223,13 @@ void runOnMain(void (^block)(void)) {
 	}
 
 	dispatch_async(self.queue, ^{
-	dispatch_async(dispatch_get_main_queue(), ^{
-		// notify all outcome listeners
-		for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
-			if ([lsnr respondsToSelector:@selector(outcomeHandled:)])
-				[lsnr outcomeHandled:outcome];
-		}});
+		dispatch_async(dispatch_get_main_queue(), ^{
+			// notify all outcome listeners
+			for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
+				if ([lsnr respondsToSelector:@selector(outcomeHandled:)])
+					[lsnr outcomeHandled:outcome];
+			}
+		});
 	});
 	THREAD_RELEASE
 }
