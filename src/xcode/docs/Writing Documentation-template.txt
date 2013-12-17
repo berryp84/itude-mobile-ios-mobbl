@@ -1,9 +1,7 @@
 # Writing Documentation #
 
 Classes are documented in the `.h` files. Documentation sets can be generated
-using [appledoc](http://gentlebytes.com/appledoc/). Generating the API docs is
-documented on
-[Confluence](http://macserver.itude.com/confluence/display/MOBBL/Generating+API+docs).
+using [appledoc](http://gentlebytes.com/appledoc/).
 
 Additional documentation like this document is generated from the files in the
 `docs` directory. You can use [markdown syntax](http://daringfireball.net/projects/markdown/syntax) 
@@ -14,3 +12,9 @@ is processed by the `appledoc` tool to resolve any cross-references you use.
 For example, this page is generated from `docs/Writing
 Documentation-template.txt`. You can insert references to class names like
 MBDocument or to additional documentation pages like Layers.
+
+To (re)generate the appledoc: 
+1. open a command line
+2. navigate to the "itude-mobile-ios-mobbl/src/xcode" folder in this project
+3. execute the command "appledoc ." (without the quotes, with the full stop). The documentation is installed in your /Users/[YOUR NAME]/Library/Developer/Shared/Documentation/DocSets folder
+4. in xcode select the menu Help->"Documentation and API reference" and look for "itude-mobile-ios-mobbl Documentation"
