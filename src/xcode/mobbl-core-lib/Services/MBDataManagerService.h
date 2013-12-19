@@ -111,5 +111,33 @@
 /** See [MBDataHandler storeDocument:] and loadDocument:forDelegate:resultSelector:errorSelector: */
 - (void) storeDocument:(MBDocument *)document forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
 
+/** Sets a request parameter on an arguments Document for a webservice [MBDataHandler loadDocument: withArguments].
+ @param value Value
+ @param key Name of the request parameter
+ @param doc Document that will be used as arguments in [MBDataHandler loadDocument: withArguments]
+ 
+ This method accepts Documents in two formats:
+ 1. Simple parameter list (legacy)
+ <Request name="">
+    <Parameter key="sessionID" value="1234567890" />
+    <Parameter key="customer" value="Acme apps">
+        <Subparameter key="address" "123 Industry street" />
+        <Subparameter key="city" "Appville" />
+        <Subparameter key="country" "United States of App" />
+    </Parameter>
+ </Request>
+ 
+ 2. REST Webservice operation plus parameters
+ <Operation name="/customer" httpMethod="POST">
+     <Parameter key="sessionID" value="1234567890" />
+     <Parameter key="customer" value="Acme apps" />
+     <Parameter key="address" "123 Industry street" />
+     <Parameter key="city" "Appville" />
+     <Parameter key="country" "United States of App" />
+ </Request>
+ 
+ */
+-(void) setRequestParameter:(NSString *)value forKey:(NSString *)key forDocument:(MBDocument *)doc;
+
 
 @end

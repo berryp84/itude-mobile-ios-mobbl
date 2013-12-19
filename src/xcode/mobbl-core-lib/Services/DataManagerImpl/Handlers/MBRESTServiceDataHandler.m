@@ -89,7 +89,7 @@
 					}
                     
 					
-					// Because the application crashed here all these seperate steps are added to pinpoint the excact location of the crash (BINCKAPPS-502)
+					// Because the application crashed here all these seperate steps are added to pinpoint the excact location of the crash.
 					NSString *endPointUri = endPoint.endPointUri;
 					NSURL *url = nil;
 					NSString *hostName = nil;

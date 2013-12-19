@@ -266,7 +266,8 @@ char *NewBase64Encode(
 //
 + (NSData *)dataFromBase64String:(NSString *)aString
 {
-	// Remove all new line characters. This caused http://dev.itude.com/jira/browse/BINCKMOBILE-295
+	// Remove all new line characters caused by unexpected behaviour in [NSString initWithData].
+    // [NSString initWithData] unexpectedly adds newlines in iOS 4.1??
 	NSData *data = [[aString stringByReplacingOccurrencesOfString:@"\n" withString:@""] dataUsingEncoding:NSASCIIStringEncoding];
 	size_t outputLength;
 	void *outputBuffer = NewBase64Decode([data bytes], [data length], &outputLength);

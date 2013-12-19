@@ -19,7 +19,6 @@
 #import "MBViewBuilderFactory.h"
 #import "MBFieldViewBuilder.h"
 #import "StringUtilities.h"
-#import "BinckUtilities.h"
 #import "MBMetadataService.h"
 #import "MBLocalizationService.h"
 #import "LocaleUtilities.h"
@@ -304,20 +303,26 @@
 	
 	NSString *textFieldValue = textField.text;
 	
-	// Representation to the User can be in Dutch (comma for decimal seperator). We need to check this before we store the value
+	// For financial apps the internal representation needs to be with US decimal seperators irrespective of the users locale. The attribute is an NSString, so some extra work is need here to check this before we store the value
 	if ([[[MBLocalizationService sharedInstance] localeCode] isEqualToString:LOCALECODEDUTCH]) {
-		if ([self.dataType isEqualToString:@"double"]) {
-			float doubleValue = [textFieldValue floatValueDutch];
-			textFieldValue = [NSString stringWithFormat:@"%f",doubleValue];
-		}
-		else if ([self.dataType isEqualToString:@"float"]) {
-			float floatValue = [textFieldValue floatValueDutch];
-			textFieldValue = [NSString stringWithFormat:@"%f",floatValue];
-		}
-		
+        textFieldValue = [self forceUSDecimalSeparatorWithValue:textFieldValue];
 	}
 	
 	[self setValue: textFieldValue];
+
+}
+
+- (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString{
+    NSString *outputString = nil;
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSLocale *nl_NL = [[NSLocale alloc] initWithLocaleIdentifier:@"nl_NL"];
+    [numberFormatter setLocale:nl_NL];
+    if ([self.dataType isEqualToString:@"double"] || [self.dataType isEqualToString:@"float"]) {            double doubleValue = [numberFormatter numberFromString:inputString].doubleValue;
+        outputString = [NSString stringWithFormat:@"%f",doubleValue];
+    }
+    
+    return outputString;
 
 }
 

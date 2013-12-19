@@ -16,7 +16,6 @@
 
 #import "MBMatrixCell.h"
 #import "StringUtilities.h"
-#import "BinckUtilities.h"
 #import "MBLocalizationService.h"
 
 @implementation MBMatrixCell

@@ -136,7 +136,7 @@
 
 -(void) updateMatrixCells:(NSArray*) cells {
 	for(MBMatrixCell *matrixCell in cells) {
-        // Update all cells. Also the hidden ones. Otherwise coloring will not appear. BINCKRETAILSLA-211
+        // Update all cells. Also the hidden ones. Otherwise coloring will not appear.
         //if (!matrixCell.hidden) {
             [matrixCell updateValue];
             [self styleMatrixCell: matrixCell];

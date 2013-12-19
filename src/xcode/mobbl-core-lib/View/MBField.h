@@ -77,6 +77,10 @@
 
 // for UISwitch
 -(void) switchToggled:(id)sender;
+
+// for financial apps
+- (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString;
+
 	
 
 @end

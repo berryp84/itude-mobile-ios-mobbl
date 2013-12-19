@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#ifndef Binck_UIView_HierarchyLogging_h
-#define Binck_UIView_HierarchyLogging_h
 
 @interface UIView (ViewHierarchyLogging)
 - (void)logViewHierarchy;
@@ -45,4 +43,3 @@
 }
 @end
 
-#endif

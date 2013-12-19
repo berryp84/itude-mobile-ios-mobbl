@@ -104,7 +104,6 @@
 		C7A99365183509D400C63904 /* MBResourceService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCC18312A3F007D2F08 /* MBResourceService.h */; };
 		C7A99366183509D400C63904 /* MBResultListener.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCE18312A3F007D2F08 /* MBResultListener.h */; };
 		C7A99367183509D400C63904 /* MBScriptService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBCF18312A3F007D2F08 /* MBScriptService.h */; };
-		C7A99368183509D400C63904 /* BinckUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD218312A3F007D2F08 /* BinckUtilities.h */; };
 		C7A99369183509D400C63904 /* ColorUtilities.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD418312A3F007D2F08 /* ColorUtilities.h */; };
 		C7A9936A183509D400C63904 /* DataUtilites.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD618312A3F007D2F08 /* DataUtilites.h */; };
 		C7A9936B183509D400C63904 /* BuildInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBD918312A3F007D2F08 /* BuildInfo.h */; };
@@ -315,7 +314,6 @@
 		C7E0ED1218312A40007D2F08 /* MBMetadataService.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBCB18312A3F007D2F08 /* MBMetadataService.m */; };
 		C7E0ED1318312A40007D2F08 /* MBResourceService.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBCD18312A3F007D2F08 /* MBResourceService.m */; };
 		C7E0ED1418312A40007D2F08 /* MBScriptService.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBD018312A3F007D2F08 /* MBScriptService.m */; };
-		C7E0ED1518312A40007D2F08 /* BinckUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBD318312A3F007D2F08 /* BinckUtilities.m */; };
 		C7E0ED1618312A40007D2F08 /* ColorUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBD518312A3F007D2F08 /* ColorUtilities.m */; };
 		C7E0ED1718312A40007D2F08 /* DataUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBD718312A3F007D2F08 /* DataUtilites.m */; };
 		C7E0ED1818312A40007D2F08 /* GTMStackTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBDE18312A3F007D2F08 /* GTMStackTrace.m */; };
@@ -514,7 +512,6 @@
 				C7A99365183509D400C63904 /* MBResourceService.h in CopyFiles */,
 				C7A99366183509D400C63904 /* MBResultListener.h in CopyFiles */,
 				C7A99367183509D400C63904 /* MBScriptService.h in CopyFiles */,
-				C7A99368183509D400C63904 /* BinckUtilities.h in CopyFiles */,
 				C7A99369183509D400C63904 /* ColorUtilities.h in CopyFiles */,
 				C7A9936A183509D400C63904 /* DataUtilites.h in CopyFiles */,
 				C7A9936B183509D400C63904 /* BuildInfo.h in CopyFiles */,
@@ -840,8 +837,6 @@
 		C7E0EBCE18312A3F007D2F08 /* MBResultListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBResultListener.h; sourceTree = "<group>"; };
 		C7E0EBCF18312A3F007D2F08 /* MBScriptService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBScriptService.h; sourceTree = "<group>"; };
 		C7E0EBD018312A3F007D2F08 /* MBScriptService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBScriptService.m; sourceTree = "<group>"; };
-		C7E0EBD218312A3F007D2F08 /* BinckUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinckUtilities.h; sourceTree = "<group>"; };
-		C7E0EBD318312A3F007D2F08 /* BinckUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinckUtilities.m; sourceTree = "<group>"; };
 		C7E0EBD418312A3F007D2F08 /* ColorUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtilities.h; sourceTree = "<group>"; };
 		C7E0EBD518312A3F007D2F08 /* ColorUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtilities.m; sourceTree = "<group>"; };
 		C7E0EBD618312A3F007D2F08 /* DataUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataUtilites.h; sourceTree = "<group>"; };
@@ -1497,8 +1492,6 @@
 		C7E0EBD118312A3F007D2F08 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				C7E0EBD218312A3F007D2F08 /* BinckUtilities.h */,
-				C7E0EBD318312A3F007D2F08 /* BinckUtilities.m */,
 				C7E0EBD418312A3F007D2F08 /* ColorUtilities.h */,
 				C7E0EBD518312A3F007D2F08 /* ColorUtilities.m */,
 				C7E0EBD618312A3F007D2F08 /* DataUtilites.h */,
@@ -1984,7 +1977,6 @@
 				C7E0ED3E18312A40007D2F08 /* MBSplitDialogContentBuilder.m in Sources */,
 				C7E0ECEA18312A40007D2F08 /* MBFormSubmission.m in Sources */,
 				C7E0ED3718312A40007D2F08 /* MBDefaultDialogDecorator.m in Sources */,
-				C7E0ED1518312A40007D2F08 /* BinckUtilities.m in Sources */,
 				C7E0ED3C18312A40007D2F08 /* MBModalPageSheetDialogDecorator.m in Sources */,
 				C7E0ED1C18312A40007D2F08 /* SBJsonParser.m in Sources */,
 				C7E0ED5118312A40007D2F08 /* MBPageViewBuilder.m in Sources */,

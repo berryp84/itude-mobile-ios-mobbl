@@ -164,4 +164,26 @@ static MBDataManagerService *_instance = nil;
 }
 
 
+/// Construction of arguments for DataHandlers
+
+-(void) setRequestParameter:(NSString *)value forKey:(NSString *)key forDocument:(MBDocument *)doc{
+    
+    MBElement *rootElement = nil;
+    rootElement = [doc valueForPath:@"Request[0]"];
+    if (!rootElement) {
+        rootElement = [doc valueForPath:@"Operation[0]"];
+    }
+    if (rootElement){
+        MBElement *parameter = [rootElement createElementWithName:@"Parameter"];
+        [parameter setValue:key forAttribute:@"key"];
+        [parameter setValue:value forAttribute:@"value"];
+    } else
+    {
+        NSString *msg = @"Unrecognised Document doc. View the documentation for accepted Document definitions";
+		@throw [[[NSException alloc]initWithName:@"Unrecognised Document" reason:msg userInfo:nil] autorelease];
+    }
+
+}
+
+
 @end

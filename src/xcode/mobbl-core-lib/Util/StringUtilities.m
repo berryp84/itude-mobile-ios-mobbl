@@ -129,7 +129,7 @@
 }	
 
 // returns a string formatted as a number with the original amount of decimals assuming the receiver is a float 
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen
 - (NSString *)formatNumberWithOriginalNumberOfDecimals
 {
 	NSString * result = nil;
@@ -160,7 +160,7 @@
 }	
 
 // returns a string formatted as a price with two decimals assuming the receiver is a float string read from XML
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen 
 - (NSString *)formatPriceWithTwoDecimals
 {
 	NSString * result = nil;
@@ -175,7 +175,7 @@
 }	
 
 // returns a string formatted as a price with three decimals assuming the receiver is a float string read from XML
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen 
 - (NSString *)formatPriceWithThreeDecimals
 {
 	NSString * result = nil;
@@ -191,7 +191,7 @@
 
 
 // returns a string formatted as a number with two decimals assuming the receiver is a float string read from XML
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen 
 - (NSString *)formatNumberWithTwoDecimals
 {
 	NSString * result = nil;
@@ -206,7 +206,7 @@
 }	
 
 // returns a string formatted as a number with three decimals assuming the receiver is a float string read from XML
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen 
 - (NSString *)formatNumberWithThreeDecimals
 {
 	NSString * result = nil;
@@ -234,7 +234,7 @@
 }	
 
 // returns a string formatted as a volume with group separators (eg, 131.224.000) assuming the receiver is an int string read from XML
-// WARNING: Only use this method to present data to the screen (BINCKAPPS-32, BINCKMOBILE-35, BINCKMOBILE-113)
+// WARNING: Only use this method to present data to the screen 
 - (NSString *)formatVolume
 {
 	NSNumberFormatter * volumeFormatter = [StringUtilitiesHelper numberFormatterToFormatVolume];
