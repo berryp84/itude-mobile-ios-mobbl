@@ -400,26 +400,30 @@
     [self showActivityIndicatorOnDialog:dialogController withMessage:nil];
 }
 
+
 - (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString *)message {
-    UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
-	if(_activityIndicatorCount == 0) {
-        CGRect bounds = topMostVisibleViewController.view.bounds;
-		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-        if (message) {
-            [blocker showWithMessage:message];
-        }
-        
-        [topMostVisibleViewController.view addSubview:blocker];
-	}else{
-        for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
-            if ([subview isKindOfClass:[MBActivityIndicator class]]) {
-                MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
-                [indicatorView setMessage:message];
-                break;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
+        if(_activityIndicatorCount == 0) {
+            CGRect bounds = topMostVisibleViewController.view.bounds;
+            MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
+            if (message) {
+                [blocker showWithMessage:message];
             }
+            
+            [topMostVisibleViewController.view addSubview:blocker];
+        } else {
+            for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
+                if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+                    MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
+                    [indicatorView setMessage:message];
+                    break;
+                }
+            }
+            
         }
-       	_activityIndicatorCount ++;
-    }
+        _activityIndicatorCount ++;
+    });
 }
 
 - (void)hideActivityIndicator {
