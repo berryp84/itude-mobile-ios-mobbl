@@ -121,10 +121,7 @@
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:endPoint.timeout];
             [self setHTTPHeaders:request withArguments:args];
             [self setHTTPRequestBody:request withArguments:args];
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-            
             data = [self dataFromRequest:request withDocumentName:(NSString*) documentName andEndpoint:endPoint];
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             [self checkResultListenerMatchesInEndpoint:endPoint withArguments:args withResponse:dataString];
             responseDoc = [self documentWithData:data andDocumentName:documentName];
@@ -132,7 +129,9 @@
             if (args) {
                 DLog(@"%@",[[args valueForPath:@"/*[0]"] asXmlWithLevel:0]);
             }
-            DLog(@"%@",dataString);
+            if (dataString) {
+                DLog(@"%@",dataString);
+            }
             @throw e;
         }
     }
@@ -162,6 +161,8 @@
 }
 
 -(NSData *) dataFromRequest:(NSURLRequest *)request withDocumentName:(NSString*) documentName andEndpoint:(MBEndPointDefinition*)endPoint{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
     //NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
     
     MBRequestDelegate *delegate = [MBRequestDelegate new];
@@ -180,11 +181,15 @@
             }
             [timer invalidate];
             if (delegate.err != nil) {
-				[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 				WLog(@"An error (%@) occured while accessing endpoint '%@'", delegate.err, endPoint.endPointUri);
 				@throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.err localizedDescription] userInfo:[delegate.err userInfo]];
 			}
+            if (!delegate.data || delegate.data.length==0) {
+				WLog(@"No data returned in response while accessing endpoint '%@'. response was: %@", endPoint.endPointUri, delegate.response.description);
+				@throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:[delegate.response debugDescription] userInfo:[delegate.err userInfo]];
+			}
         }
+        return delegate.data;
     }
     @catch (NSException * e) {
         @throw e;
@@ -192,9 +197,8 @@
     @finally {
         [delegate release];
         [timer invalidate];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }
-
- 
 }
 
 -(void)checkForConnectionErrorsInDelegate:(MBRequestDelegate *)delegate withDocumentName:(NSString*)documentName andEndPoint:(MBEndPointDefinition *)endPoint{

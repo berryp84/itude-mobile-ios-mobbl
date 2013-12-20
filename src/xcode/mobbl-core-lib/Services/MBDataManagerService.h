@@ -22,6 +22,7 @@
 #define DATA_HANDLER_FILE @"MBFileDataHandler"
 #define DATA_HANDLER_SYSTEM @"MBSystemDataHandler"
 #define DATA_HANDLER_SQL @"MBSQLDataHandler"
+#define DATA_HANDLER_WS @"MBWebserviceDataHandler"
 #define DATA_HANDLER_WS_REST @"MBRESTServiceDataHandler"
 #define DATA_HANDLER_WS_MOBBL @"MBMobbl1ServerDataHandler"
 
