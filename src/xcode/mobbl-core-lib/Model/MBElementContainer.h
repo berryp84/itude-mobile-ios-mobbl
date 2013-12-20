@@ -20,11 +20,10 @@
 /**
 * A node in a tree of MBElement instances.
 *
-* Configuration and application state in MOBBL is represented in trees of MBELement instances,
-* resembling an XML tree.
+* In MOBBL, data is represented in MBDocuments and MBElements. An MBDocument is a lightweight xml-like structure, optimised for mobile use.
 *
-* Each ElementContainer has an associated MBElementDefinition. The structure of the Element tree
-* must conform to the ElementDefinition.
+* MBDocuments and MBElements are both MBElementContainers. Each ElementContainer has an associated MBElementDefinition which defines its structure. 
+* The most frequently used methods are valueForPath:, setValue: forPath: and elementsWithName:
 */
 @interface MBElementContainer : NSObject {
 	NSMutableDictionary *_elements; // Dictionary of lists of elements
@@ -53,17 +52,47 @@
 - (void) deleteElementWithName: (NSString*) name atIndex:(int) index;
 - (void) deleteAllChildElements;
 
-/// @name Getting Elements from the Tree
+/// @name Returns a set of MBElements
 - (NSMutableDictionary*) elements;
+/* Returns an array of MBElements
+ *param name The (tag)name of the element to retrieve.
+ */
 - (NSMutableArray*) elementsWithName: (NSString*) name;
+/* Gets a value from the Document or Element
 
-/// @name Getting a Value from the Tree
+ @param path an NSString with an xpath-like syntax
+ Examples:
+ "/CUSTOMER[0]/@name"               returns the name attribute of the first CUSTOMER element.
+ "/CUSTOMER[1]/ADDRESS[0]/@street"  returns the street attribute of the first ADDRESS element nested in the second CUSTOMER element.
+ "/CUSTOMER[1]"                     returns the MBElement attribute of the second CUSTOMER.
+ 
+ For debugging purposes an MBElementContainer can easily be pretty printed with the description method (implicit default method for NSLog in objc).
+ 
+ Return values are:
+ * nil
+ * An MBElement
+ * An MBAtribute
+ * A Dictionary of MBElements
+ 
+ */
 - (id) valueForPath:(NSString *)path;
+/// Internal use only
 - (id) valueForPath:(NSString*)path translatedPathComponents:(NSMutableArray*) translatedPathComponents;
+/// Internal use only
 - (id) valueForPathComponents:(NSMutableArray*)pathComponents withPath: (NSString*) originalPath nillIfMissing:(BOOL) nillIfMissing translatedPathComponents:(NSMutableArray*)translatedPathComponents;
 
-/// @name Setting a Value in the Tree
-- (void) setValue:(NSString*)value forPath:(NSString *)path;
+/* Sets an attribute value from the Document or Element
+
+ @param value an NSString. At the time of writing MBAttributes are intenally represented as NSStrings
+ @param path an NSString with an xpath-like syntax
+ Examples:
+ "/CUSTOMER[0]/@name"               the name attribute of the first CUSTOMER element.
+ "/CUSTOMER[1]/ADDRESS[0]/@street"  the street attribute of the first ADDRESS element nested in the second CUSTOMER element.
+ "/CUSTOMER[1]/text()"              the body content of the MBElement attribute of the second CUSTOMER. The value will be inserted between the <CUSTOMER> and </CUSTOMER> tags rather than in an attribute. text() is a special keyword.
+ 
+ For debugging purposes an MBElementContainer can easily be pretty printed with the description method (implicit default method for NSLog in objc).
+*/
+ - (void) setValue:(NSString*)value forPath:(NSString *)path;
 
 /// @name Evaluating Expressions
 - (NSString*) evaluateExpression:(NSString*) expression;
