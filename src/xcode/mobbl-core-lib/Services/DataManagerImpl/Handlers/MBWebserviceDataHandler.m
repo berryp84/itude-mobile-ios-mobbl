@@ -27,10 +27,12 @@
 
 
 
+
+@interface MBWebserviceDataHandler(hidden)
+    -(NSString*) convertDataToString:(NSData*) data;
+@end
+
 @implementation MBWebserviceDataHandler
-
-
-
 
 - (id) init {
 	self = [super init];
@@ -88,17 +90,24 @@
     MBDocument *reformattedArgs = [self reformatRequestArgumentsForServer:doc];
 	[self addAttributesToRequestArguments:reformattedArgs];
     MBDocument *result = nil;
+    NSString *uniqueId = nil;
+    if(doc){
+        uniqueId = [doc uniqueId];
+    }
+    else{
+        uniqueId = documentName;
+    }
     @try {
         result = [self doLoadFreshDocument:documentName withArguments:reformattedArgs];
         BOOL cacheable = FALSE;
         MBEndPointDefinition *endPoint = [self getEndPointForDocument:documentName];
         cacheable = [endPoint cacheable];
         if(cacheable) {
-            [MBCacheManager setDocument:result forKey:[doc uniqueId] timeToLive:endPoint.ttl];
+            [MBCacheManager setDocument:result forKey:uniqueId timeToLive:endPoint.ttl];
         }
     }
     @catch (NSException *exception) {
-        [MBCacheManager expireDocumentForKey:[doc uniqueId]];
+        [MBCacheManager expireDocumentForKey:uniqueId];
         @throw exception;
     }
     @finally {
@@ -122,7 +131,7 @@
             [self setHTTPHeaders:request withArguments:args];
             [self setHTTPRequestBody:request withArguments:args];
             data = [self dataFromRequest:request withDocumentName:(NSString*) documentName andEndpoint:endPoint];
-            dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            dataString = [self convertDataToString:data];
             [self checkResultListenerMatchesInEndpoint:endPoint withArguments:args withResponse:dataString];
             responseDoc = [self documentWithData:data andDocumentName:documentName];
         } @catch (NSException * e) {
@@ -163,8 +172,6 @@
 -(NSData *) dataFromRequest:(NSURLRequest *)request withDocumentName:(NSString*) documentName andEndpoint:(MBEndPointDefinition*)endPoint{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
-    //NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&err];
-    
     MBRequestDelegate *delegate = [MBRequestDelegate new];
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:endPoint.timeout target:(delegate) selector:@selector(cancel) userInfo:nil repeats:NO];
     @try {
@@ -246,13 +253,26 @@
     }
     
     if (networkStatus == NotReachable) {
-        //if([[Reachability reachabilityWithHostName:[[NSURL URLWithString:endPoint.endPointUri] host]] currentReachabilityStatus ] == NotReachable){
         // Big problem, throw Exception
         [delegate.connection cancel];
         @throw [MBServerException exceptionWithName:MBLocalizedString(@"Network error") reason:MBLocalizedString(@"Server unreachable") userInfo:nil];
     }
 
 }
+
+-(NSString*) convertDataToString:(NSData*) data{
+    NSString *string = nil;
+    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if(!string){
+        string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+    }
+    if(!string){
+        string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    }
+    [string autorelease];
+    return string;
+}
+
 
 -(BOOL) checkResultListenerMatchesInEndpoint:(MBEndPointDefinition *)endPoint withArguments:(MBDocument*)args withResponse:(NSString*)dataString{
     for(MBResultListenerDefinition *lsnr in [endPoint resultListeners]) {
