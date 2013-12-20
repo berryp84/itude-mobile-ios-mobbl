@@ -195,7 +195,7 @@
 
 -(UIViewController*)createMenuController {
 	UIViewController *menu = [[[UIViewController alloc]init] autorelease];
-	menu.view = [[UIView alloc] init];
+	menu.view = [[[UIView alloc] init] autorelease];
 	menu.view.backgroundColor = [UIColor redColor];
 	return menu;
 }

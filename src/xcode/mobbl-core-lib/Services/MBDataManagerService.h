@@ -23,7 +23,6 @@
 #define DATA_HANDLER_SYSTEM @"MBSystemDataHandler"
 #define DATA_HANDLER_SQL @"MBSQLDataHandler"
 #define DATA_HANDLER_WS_REST @"MBRESTServiceDataHandler"
-#define DATA_HANDLER_WS_REST_GET @"MBRESTGetServiceDataHandler"
 #define DATA_HANDLER_WS_MOBBL @"MBMobbl1ServerDataHandler"
 
 #define MAX_CONCURRENT_OPERATIONS 5
@@ -111,10 +110,10 @@
 /** See [MBDataHandler storeDocument:] and loadDocument:forDelegate:resultSelector:errorSelector: */
 - (void) storeDocument:(MBDocument *)document forDelegate:(id) delegate resultSelector:(SEL) resultSelector errorSelector:(SEL) errorSelector;
 
-/** Sets a request parameter on an arguments Document for a webservice [MBDataHandler loadDocument: withArguments].
+/** Sets a request parameter on an arguments Document for a webservice [MBDataHandler loadDocument: withArguments] and returns the result.
  @param value Value
  @param key Name of the request parameter
- @param doc Document that will be used as arguments in [MBDataHandler loadDocument: withArguments]
+ @param doc Document that will be used as arguments in [MBDataHandler loadDocument: withArguments]. If nil, then a Document is auto-created.
  
  This method accepts Documents in two formats:
  1. Simple parameter list (legacy)
@@ -137,7 +136,7 @@
  </Request>
  
  */
--(void) setRequestParameter:(NSString *)value forKey:(NSString *)key forDocument:(MBDocument *)doc;
++ (MBDocument*) setRequestParameter:(NSString *)value forKey:(NSString *)key forDocument:(MBDocument *)doc;
 
 
 @end

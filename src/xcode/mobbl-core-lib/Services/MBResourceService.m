@@ -109,7 +109,7 @@ static MBResourceService *_instance = nil;
 - (void)playAudioByID:(NSString*) resourceId {
     MBResourceDefinition *def = [self resourceDefinitionByID:resourceId];
     NSURL *soundFileURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [def.url substringFromIndex:7]]];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    AVAudioPlayer *player = [[[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil] autorelease];
     [player play];
 }
 

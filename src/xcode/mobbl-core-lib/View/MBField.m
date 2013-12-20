@@ -315,8 +315,8 @@
 - (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString{
     NSString *outputString = nil;
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSLocale *nl_NL = [[NSLocale alloc] initWithLocaleIdentifier:@"nl_NL"];
+    NSNumberFormatter *numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSLocale *nl_NL = [[[NSLocale alloc] initWithLocaleIdentifier:@"nl_NL"] autorelease];
     [numberFormatter setLocale:nl_NL];
     if ([self.dataType isEqualToString:@"double"] || [self.dataType isEqualToString:@"float"]) {            double doubleValue = [numberFormatter numberFromString:inputString].doubleValue;
         outputString = [NSString stringWithFormat:@"%f",doubleValue];

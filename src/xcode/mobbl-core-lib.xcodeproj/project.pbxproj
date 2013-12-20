@@ -90,11 +90,9 @@
 		C7A99357183509D400C63904 /* MBFileDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB118312A3F007D2F08 /* MBFileDataHandler.h */; };
 		C7A99358183509D400C63904 /* MBMemoryDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB318312A3F007D2F08 /* MBMemoryDataHandler.h */; };
 		C7A99359183509D400C63904 /* MBMobbl1ServerDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB518312A3F007D2F08 /* MBMobbl1ServerDataHandler.h */; };
-		C7A9935A183509D400C63904 /* MBRESTGetServiceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB718312A3F007D2F08 /* MBRESTGetServiceDataHandler.h */; };
 		C7A9935B183509D400C63904 /* MBRESTServiceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBB918312A3F007D2F08 /* MBRESTServiceDataHandler.h */; };
 		C7A9935C183509D400C63904 /* MBSQLDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBB18312A3F007D2F08 /* MBSQLDataHandler.h */; };
 		C7A9935D183509D400C63904 /* MBSystemDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBD18312A3F007D2F08 /* MBSystemDataHandler.h */; };
-		C7A9935E183509D400C63904 /* MBURLConnectionDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBBF18312A3F007D2F08 /* MBURLConnectionDataHandler.h */; };
 		C7A9935F183509D400C63904 /* MBWebserviceDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC118312A3F007D2F08 /* MBWebserviceDataHandler.h */; };
 		C7A99360183509D400C63904 /* MBDataHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC318312A3F007D2F08 /* MBDataHandler.h */; };
 		C7A99361183509D400C63904 /* MBDataHandlerBase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7E0EBC418312A3F007D2F08 /* MBDataHandlerBase.h */; };
@@ -302,11 +300,9 @@
 		C7E0ED0618312A40007D2F08 /* MBFileDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBB218312A3F007D2F08 /* MBFileDataHandler.m */; };
 		C7E0ED0718312A40007D2F08 /* MBMemoryDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBB418312A3F007D2F08 /* MBMemoryDataHandler.m */; };
 		C7E0ED0818312A40007D2F08 /* MBMobbl1ServerDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBB618312A3F007D2F08 /* MBMobbl1ServerDataHandler.m */; };
-		C7E0ED0918312A40007D2F08 /* MBRESTGetServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBB818312A3F007D2F08 /* MBRESTGetServiceDataHandler.m */; };
 		C7E0ED0A18312A40007D2F08 /* MBRESTServiceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBBA18312A3F007D2F08 /* MBRESTServiceDataHandler.m */; };
 		C7E0ED0B18312A40007D2F08 /* MBSQLDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBBC18312A3F007D2F08 /* MBSQLDataHandler.m */; };
 		C7E0ED0C18312A40007D2F08 /* MBSystemDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBBE18312A3F007D2F08 /* MBSystemDataHandler.m */; };
-		C7E0ED0D18312A40007D2F08 /* MBURLConnectionDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBC018312A3F007D2F08 /* MBURLConnectionDataHandler.m */; };
 		C7E0ED0E18312A40007D2F08 /* MBWebserviceDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBC218312A3F007D2F08 /* MBWebserviceDataHandler.m */; };
 		C7E0ED0F18312A40007D2F08 /* MBDataHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBC518312A3F007D2F08 /* MBDataHandlerBase.m */; };
 		C7E0ED1018312A40007D2F08 /* MBDataManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E0EBC718312A3F007D2F08 /* MBDataManagerService.m */; };
@@ -498,11 +494,9 @@
 				C7A99357183509D400C63904 /* MBFileDataHandler.h in CopyFiles */,
 				C7A99358183509D400C63904 /* MBMemoryDataHandler.h in CopyFiles */,
 				C7A99359183509D400C63904 /* MBMobbl1ServerDataHandler.h in CopyFiles */,
-				C7A9935A183509D400C63904 /* MBRESTGetServiceDataHandler.h in CopyFiles */,
 				C7A9935B183509D400C63904 /* MBRESTServiceDataHandler.h in CopyFiles */,
 				C7A9935C183509D400C63904 /* MBSQLDataHandler.h in CopyFiles */,
 				C7A9935D183509D400C63904 /* MBSystemDataHandler.h in CopyFiles */,
-				C7A9935E183509D400C63904 /* MBURLConnectionDataHandler.h in CopyFiles */,
 				C7A9935F183509D400C63904 /* MBWebserviceDataHandler.h in CopyFiles */,
 				C7A99360183509D400C63904 /* MBDataHandler.h in CopyFiles */,
 				C7A99361183509D400C63904 /* MBDataHandlerBase.h in CopyFiles */,
@@ -643,6 +637,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		003EA71A1864349000946423 /* Source Code License.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Source Code License.rtf"; sourceTree = "<group>"; };
 		00ED5E0F1806EF2900C01186 /* Layers-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Layers-template.txt"; sourceTree = "<group>"; };
 		00ED5E101806EF2900C01186 /* Writing Documentation-template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Writing Documentation-template.txt"; sourceTree = "<group>"; };
 		1CC88E85171ED84200B30461 /* libmobbl-core-lib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmobbl-core-lib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -811,16 +806,12 @@
 		C7E0EBB418312A3F007D2F08 /* MBMemoryDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMemoryDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBB518312A3F007D2F08 /* MBMobbl1ServerDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMobbl1ServerDataHandler.h; sourceTree = "<group>"; };
 		C7E0EBB618312A3F007D2F08 /* MBMobbl1ServerDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBMobbl1ServerDataHandler.m; sourceTree = "<group>"; };
-		C7E0EBB718312A3F007D2F08 /* MBRESTGetServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTGetServiceDataHandler.h; sourceTree = "<group>"; };
-		C7E0EBB818312A3F007D2F08 /* MBRESTGetServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRESTGetServiceDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBB918312A3F007D2F08 /* MBRESTServiceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRESTServiceDataHandler.h; sourceTree = "<group>"; };
 		C7E0EBBA18312A3F007D2F08 /* MBRESTServiceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRESTServiceDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBBB18312A3F007D2F08 /* MBSQLDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSQLDataHandler.h; sourceTree = "<group>"; };
 		C7E0EBBC18312A3F007D2F08 /* MBSQLDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSQLDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBBD18312A3F007D2F08 /* MBSystemDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSystemDataHandler.h; sourceTree = "<group>"; };
 		C7E0EBBE18312A3F007D2F08 /* MBSystemDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSystemDataHandler.m; sourceTree = "<group>"; };
-		C7E0EBBF18312A3F007D2F08 /* MBURLConnectionDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBURLConnectionDataHandler.h; sourceTree = "<group>"; };
-		C7E0EBC018312A3F007D2F08 /* MBURLConnectionDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBURLConnectionDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBC118312A3F007D2F08 /* MBWebserviceDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBWebserviceDataHandler.h; sourceTree = "<group>"; };
 		C7E0EBC218312A3F007D2F08 /* MBWebserviceDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBWebserviceDataHandler.m; sourceTree = "<group>"; };
 		C7E0EBC318312A3F007D2F08 /* MBDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBDataHandler.h; sourceTree = "<group>"; };
@@ -1331,6 +1322,7 @@
 		C7E0EB7718312A3F007D2F08 /* MGSplitViewController */ = {
 			isa = PBXGroup;
 			children = (
+				003EA71A1864349000946423 /* Source Code License.rtf */,
 				C7E0EB7818312A3F007D2F08 /* MGSplitCornersView.h */,
 				C7E0EB7918312A3F007D2F08 /* MGSplitCornersView.m */,
 				C7E0EB7A18312A3F007D2F08 /* MGSplitDividerView.h */,
@@ -1473,16 +1465,12 @@
 				C7E0EBB418312A3F007D2F08 /* MBMemoryDataHandler.m */,
 				C7E0EBB518312A3F007D2F08 /* MBMobbl1ServerDataHandler.h */,
 				C7E0EBB618312A3F007D2F08 /* MBMobbl1ServerDataHandler.m */,
-				C7E0EBB718312A3F007D2F08 /* MBRESTGetServiceDataHandler.h */,
-				C7E0EBB818312A3F007D2F08 /* MBRESTGetServiceDataHandler.m */,
 				C7E0EBB918312A3F007D2F08 /* MBRESTServiceDataHandler.h */,
 				C7E0EBBA18312A3F007D2F08 /* MBRESTServiceDataHandler.m */,
 				C7E0EBBB18312A3F007D2F08 /* MBSQLDataHandler.h */,
 				C7E0EBBC18312A3F007D2F08 /* MBSQLDataHandler.m */,
 				C7E0EBBD18312A3F007D2F08 /* MBSystemDataHandler.h */,
 				C7E0EBBE18312A3F007D2F08 /* MBSystemDataHandler.m */,
-				C7E0EBBF18312A3F007D2F08 /* MBURLConnectionDataHandler.h */,
-				C7E0EBC018312A3F007D2F08 /* MBURLConnectionDataHandler.m */,
 				C7E0EBC118312A3F007D2F08 /* MBWebserviceDataHandler.h */,
 				C7E0EBC218312A3F007D2F08 /* MBWebserviceDataHandler.m */,
 			);
@@ -1929,7 +1917,6 @@
 				C7E0ED2218312A40007D2F08 /* MBDevice.m in Sources */,
 				C7E0ED6018312A40007D2F08 /* MBNoTransitionStyle.m in Sources */,
 				C7E0ED4B18312A40007D2F08 /* MBForEachViewBuilder.m in Sources */,
-				C7E0ED0D18312A40007D2F08 /* MBURLConnectionDataHandler.m in Sources */,
 				C7E0ED4018312A40007D2F08 /* MBCheckboxBuilder.m in Sources */,
 				C7E0ED0F18312A40007D2F08 /* MBDataHandlerBase.m in Sources */,
 				C7E0ED1018312A40007D2F08 /* MBDataManagerService.m in Sources */,
@@ -1951,7 +1938,6 @@
 				E2189DAA1848A94600DD5AD4 /* MBOutcomeManager.m in Sources */,
 				C7E0ED4F18312A40007D2F08 /* MBViewBuilder.m in Sources */,
 				C7E0ECFD18312A40007D2F08 /* MBDocumentFactory.m in Sources */,
-				C7E0ED0918312A40007D2F08 /* MBRESTGetServiceDataHandler.m in Sources */,
 				C7E0ED2018312A40007D2F08 /* MBCacheWriter.m in Sources */,
 				C7E0ED5618312A40007D2F08 /* MBPlainPanelBuilder.m in Sources */,
 				C7E0ECF018312A40007D2F08 /* UIViewController+Rotation.m in Sources */,
