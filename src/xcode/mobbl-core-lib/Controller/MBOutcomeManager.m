@@ -28,6 +28,7 @@
 #import "MBViewBuilderFactory.h"
 #import "MBPage.h"
 #import "MBAlertController.h"
+#import "MBMacros.h"
 #import <CoreFoundation/CoreFoundation.h>
 
 
@@ -90,7 +91,7 @@ void runOnMain(void (^block)(void)) {
 
 - (void) doHandleOutcome:(MBOutcome *)outcome {
 	THREAD_DUMP("doHandleOutcome");
-	NSLog(@"MBApplicationController:handleOutcome: %@", outcome);
+	DLog(@"MBApplicationController:handleOutcome: %@", outcome);
 
 	// notify all outcome listeners
 	for(id<MBOutcomeListenerProtocol> lsnr in self.outcomeListeners) {
@@ -118,7 +119,7 @@ void runOnMain(void (^block)(void)) {
 
     if(shouldPersist) {
 		if([outcome document] == nil) {
-			NSLog(@"WARNING: origin=%@ and name=%@ has persistDocument=TRUE but there is no document (probably the outcome originates from an action; which cannot have a document)", outcome.originName, outcome.outcomeName);
+			DLog(@"WARNING: origin=%@ and name=%@ has persistDocument=TRUE but there is no document (probably the outcome originates from an action; which cannot have a document)", outcome.originName, outcome.outcomeName);
 		}
 		else [[MBDataManagerService sharedInstance] storeDocument: outcome.document];
 	}
@@ -347,7 +348,7 @@ void runOnMain(void (^block)(void)) {
 
 			if(actionOutcome == nil) {
 				[[MBApplicationController currentInstance].viewManager hideActivityIndicator];
-				NSLog(@"No outcome produced by action %@ (outcome == nil); no further procesing.", actionDef.name);
+				DLog(@"No outcome produced by action %@ (outcome == nil); no further procesing.", actionDef.name);
 			}
 			else {
 				[self handleActionResult:[NSArray arrayWithObjects:causingOutcome, actionDef, actionOutcome, nil]];
