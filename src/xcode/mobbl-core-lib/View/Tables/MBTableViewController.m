@@ -66,7 +66,6 @@
     for(MBWebView *webView in [_webViews allValues]) {
         webView.delegate = nil;
     }
-    //BINCKAPPS-635
     //ios tries to update sublayers, which calls the related uitableview to refresh
     //Uitableview then calls its delegate which has already been deallocated (an instance of this class)
     //so we manually remove the uitableview from its delegate controller when the controller gets deallocated

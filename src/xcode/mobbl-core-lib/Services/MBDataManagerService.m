@@ -18,7 +18,6 @@
 #import "MBMetadataService.h"
 #import "MBSQLDataHandler.h"
 #import "MBRESTServiceDataHandler.h"
-#import "MBRESTGetServiceDataHandler.h"
 #import "MBMemoryDataHandler.h"
 #import "MBFileDataHandler.h"
 #import "MBMobbl1ServerDataHandler.h"
@@ -55,8 +54,8 @@ static MBDataManagerService *_instance = nil;
         [self registerDataHandler:[[MBSystemDataHandler new] autorelease] withName: DATA_HANDLER_SYSTEM];
         [self registerDataHandler:[[MBSQLDataHandler new] autorelease] withName: DATA_HANDLER_SQL];
         [self registerDataHandler:[[MBMemoryDataHandler new] autorelease] withName: DATA_HANDLER_MEMORY];
+        [self registerDataHandler:[[MBWebserviceDataHandler new] autorelease] withName: DATA_HANDLER_WS];
         [self registerDataHandler:[[MBRESTServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST];
-        [self registerDataHandler:[[MBRESTGetServiceDataHandler new] autorelease] withName: DATA_HANDLER_WS_REST_GET];
 		[self registerDataHandler:[[MBMobbl1ServerDataHandler new] autorelease] withName: DATA_HANDLER_WS_MOBBL];
 	}
 	return self;
@@ -161,6 +160,60 @@ static MBDataManagerService *_instance = nil;
 
 - (void) setMaxConcurrentOperations:(int) max {
 	[_operationQueue setMaxConcurrentOperationCount:max];
+}
+
+
+/// Construction of arguments for DataHandlers
+
++ (MBDocumentDefinition *)argumentsDocumentDefinition
+{
+    MBDocumentDefinition *argumentsDocumentDefinition = [[[MBDocumentDefinition alloc] init] autorelease];
+    MBElementDefinition *operationDefinition = [[MBElementDefinition alloc] init];
+    operationDefinition.name = @"Operation";
+    [argumentsDocumentDefinition addElement:operationDefinition];
+    [self addAttribute:operationDefinition name:@"name" type:@"string"];
+    [self addAttribute:operationDefinition name:@"httpMethod" type:@"string"];
+    MBElementDefinition *parameterDefinition = [[MBElementDefinition alloc] init];
+    parameterDefinition.name = @"Parameter";
+    parameterDefinition.minOccurs = 0;
+    [operationDefinition addElement:parameterDefinition];
+    
+    [self addAttribute:parameterDefinition name:@"key" type:@"string"];
+    [self addAttribute:parameterDefinition name:@"value" type:@"string"];
+    
+    [parameterDefinition release];
+    [operationDefinition release];
+    
+    return argumentsDocumentDefinition;
+}
+
++ (void) addAttribute:(MBElementDefinition*) elementDef name:(NSString*) name type:(NSString*) type {
+    MBAttributeDefinition *attributeDef = [[MBAttributeDefinition new] autorelease];
+    attributeDef.name = name;
+    attributeDef.type = type;
+    [elementDef addAttribute: attributeDef];
+}
+
++ (MBDocument*) setRequestParameter:(NSString *)value forKey:(NSString *)key forDocument:(MBDocument *)doc{
+    if(!doc){
+        doc = [[self argumentsDocumentDefinition] createDocument];
+    }
+    MBElement *rootElement = nil;
+    rootElement = [doc valueForPath:@"Request[0]"];
+    if (!rootElement) {
+        rootElement = [doc valueForPath:@"Operation[0]"];
+    }
+    if (rootElement){
+        MBElement *parameter = [rootElement createElementWithName:@"Parameter"];
+        [parameter setValue:key forAttribute:@"key"];
+        [parameter setValue:value forAttribute:@"value"];
+    } else
+    {
+        NSString *msg = @"Unrecognised Document doc. View the documentation for accepted Document definitions. Leave parameter doc nil to generate a Document with the correct syntax";
+		@throw [[[NSException alloc]initWithName:@"Unrecognised Document" reason:msg userInfo:nil] autorelease];
+    }
+    return doc;
+
 }
 
 

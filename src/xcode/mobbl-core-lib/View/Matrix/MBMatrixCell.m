@@ -16,7 +16,6 @@
 
 #import "MBMatrixCell.h"
 #import "StringUtilities.h"
-#import "BinckUtilities.h"
 #import "MBLocalizationService.h"
 
 @implementation MBMatrixCell
@@ -70,7 +69,7 @@
 	//
 	// Apply a formatmask
 	if (field.formatMask != nil && [field.dataType isEqualToString:@"double"]) {
-		fieldValue = [NSString stringWithFormat:field.formatMask,[fieldValue floatValueDutch]];
+		fieldValue = [NSString stringWithFormat:field.formatMask,[fieldValue floatValue]];
 	}
 	
 	else if (field.formatMask != nil && [field.dataType isEqualToString:@"dateTime"] && (fieldValue != field.valueIfNil)) {

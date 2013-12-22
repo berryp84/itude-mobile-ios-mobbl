@@ -62,8 +62,6 @@
 {
     [super viewDidLoad];
     
-    //removed Binck related styler, TODO: update pickerController for Binck!
-    //	BinckStyleHandler * styler = (BinckStyleHandler *)[MBViewBuilderFactory sharedInstance].styleHandler;
     MBStyleHandler *styler = [MBViewBuilderFactory sharedInstance].styleHandler;
 	[styler styleToolbar:_toolbar];
 	

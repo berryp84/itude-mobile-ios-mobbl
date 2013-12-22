@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-#ifndef UIView_HierarchyLogging_h
-#define UIView_HierarchyLogging_h
-
 @interface UIView (ViewHierarchyLogging)
 - (void)logViewHierarchy;
 - (void)logViewHierarchy:(int)index;
@@ -45,4 +42,3 @@
 }
 @end
 
-#endif

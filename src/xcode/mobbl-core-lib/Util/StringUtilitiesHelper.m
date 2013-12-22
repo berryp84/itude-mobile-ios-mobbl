@@ -42,7 +42,6 @@ static StringUtilitiesHelper *_instance = nil;
 - (id) init {
 	if (self =[super init]) {
 		
-		// force Binck locale
 		NSString *decimalSeparator = [[NSLocale currentLocale] getDecimalSeparator];
 		NSString *groupingSeparator = [[NSLocale currentLocale] getGroupingSeparator];
 		
@@ -53,11 +52,15 @@ static StringUtilitiesHelper *_instance = nil;
 		// Date or time date formatter
 		self.dateFormatterToFormatDateDependingOnCurrentDate = [[[NSDateFormatter alloc] init] autorelease];
 
+        //
+        // Financial number formatters
+        //
+        
 		// Volume
 		self.volumeNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 		[self.volumeNumberFormatter setUsesGroupingSeparator:YES];
-		[self.volumeNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.volumeNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.volumeNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.volumeNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		[self.volumeNumberFormatter setGroupingSize:3];
 		
 		// Price with minimal decimals
@@ -67,8 +70,8 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.priceWithMinimalDecimalsNumberFormatter setMinimumFractionDigits:0];
 		[self.priceWithMinimalDecimalsNumberFormatter setUsesGroupingSeparator:YES];
 		[self.priceWithMinimalDecimalsNumberFormatter setGroupingSize:3];
-		[self.priceWithMinimalDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.priceWithMinimalDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.priceWithMinimalDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.priceWithMinimalDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		
 		// Price with two decimals
 		self.priceWithTwoDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
@@ -77,8 +80,8 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.priceWithTwoDecimalsNumberFormatter setMinimumFractionDigits:2];
 		[self.priceWithTwoDecimalsNumberFormatter setUsesGroupingSeparator:YES];
 		[self.priceWithTwoDecimalsNumberFormatter setGroupingSize:3];
-		[self.priceWithTwoDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.priceWithTwoDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.priceWithTwoDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.priceWithTwoDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		
 		// Price with trhee decimals
 		self.priceWithThreeDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
@@ -87,8 +90,8 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.priceWithThreeDecimalsNumberFormatter setMinimumFractionDigits:3];
 		[self.priceWithThreeDecimalsNumberFormatter setUsesGroupingSeparator:YES];
 		[self.priceWithThreeDecimalsNumberFormatter setGroupingSize:3];
-		[self.priceWithThreeDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.priceWithThreeDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.priceWithThreeDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.priceWithThreeDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		
 		// Number with original number of decimals
 		self.numberWithOriginalNumberOfDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
@@ -98,15 +101,15 @@ static StringUtilitiesHelper *_instance = nil;
 		//[self.numberWithOriginalNumberOfDecimalsNumberFormatter setMinimumFractionDigits:3];
 		//[self.numberWithOriginalNumberOfDecimalsNumberFormatter setMaximumFractionDigits:3];
 		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setUsesGroupingSeparator:NO];
-		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
+		[self.numberWithOriginalNumberOfDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
 		
 		// Number with two decimals
 		self.numberWithTwoDecimalsNumberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
 		[self.numberWithTwoDecimalsNumberFormatter setMinimumIntegerDigits:1];
 		[self.numberWithTwoDecimalsNumberFormatter setMaximumFractionDigits:2];
 		[self.numberWithTwoDecimalsNumberFormatter setUsesGroupingSeparator:YES];
-		[self.numberWithTwoDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.numberWithTwoDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.numberWithTwoDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.numberWithTwoDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		[self.numberWithTwoDecimalsNumberFormatter setGroupingSize:3];
 		
 		// Number with three decimals
@@ -114,8 +117,8 @@ static StringUtilitiesHelper *_instance = nil;
 		[self.numberWithThreeDecimalsNumberFormatter setMinimumIntegerDigits:1];
 		[self.numberWithThreeDecimalsNumberFormatter setMaximumFractionDigits:3];
 		[self.numberWithThreeDecimalsNumberFormatter setUsesGroupingSeparator:YES];
-		[self.numberWithThreeDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; // force Binck locale
-		[self.numberWithThreeDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; // force Binck locale
+		[self.numberWithThreeDecimalsNumberFormatter setDecimalSeparator:decimalSeparator]; 
+		[self.numberWithThreeDecimalsNumberFormatter setGroupingSeparator:groupingSeparator]; 
 		[self.numberWithThreeDecimalsNumberFormatter setGroupingSize:3];
 
 	}
