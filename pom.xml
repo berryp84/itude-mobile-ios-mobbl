@@ -71,7 +71,7 @@
 		<repository>
 			<id>itudemobile-github-repository</id>
 			<name>ItudeMobile Github repository</name>
-			<url>http://itudemobile.github.io/maven-repository/releases</url>
+			<url>http://mobbl.org/maven-repository/releases</url>
 		</repository>
 	</repositories>
 	  
