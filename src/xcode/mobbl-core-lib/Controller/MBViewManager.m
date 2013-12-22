@@ -401,25 +401,28 @@
 }
 
 - (void)showActivityIndicatorOnDialog:(MBDialogController *)dialogController withMessage:(NSString *)message {
-    UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
-	if(_activityIndicatorCount == 0) {
-        CGRect bounds = topMostVisibleViewController.view.bounds;
-		MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
-        if (message) {
-            [blocker showWithMessage:message];
-        }
-        
-        [topMostVisibleViewController.view addSubview:blocker];
-	}else{
-        for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
-            if ([subview isKindOfClass:[MBActivityIndicator class]]) {
-                MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
-                [indicatorView setMessage:message];
-                break;
-            }
-        }
+	dispatch_async(dispatch_get_main_queue(), ^{
+		UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
+		if(_activityIndicatorCount == 0) {
+			CGRect bounds = topMostVisibleViewController.view.bounds;
+			MBActivityIndicator *blocker = [[[MBActivityIndicator alloc] initWithFrame:bounds] autorelease];
+			if (message) {
+				[blocker showWithMessage:message];
+			}
+			
+			[topMostVisibleViewController.view addSubview:blocker];
+		} else {
+			for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
+				if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+					MBActivityIndicator *indicatorView = (MBActivityIndicator *)subview;
+					[indicatorView setMessage:message];
+					break;
+				}
+			}
+
+		}
        	_activityIndicatorCount ++;
-    }
+	});
 }
 
 - (void)hideActivityIndicator {
@@ -427,20 +430,21 @@
 }
 
 - (void)hideActivityIndicatorOnDialog:(MBDialogController *)dialogController {
-	if(_activityIndicatorCount > 0) {
-		_activityIndicatorCount--;
-		
-		if(_activityIndicatorCount == 0) {
-            UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
-            for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
-                if ([subview isKindOfClass:[MBActivityIndicator class]]) {
-					dispatch_async(dispatch_get_main_queue(), ^{
-                    [subview removeFromSuperview];
-					});
-                }
-            }
+	UIViewController *topMostVisibleViewController = (dialogController) ? dialogController.rootViewController : [self topMostVisibleViewController];
+
+	dispatch_async(dispatch_get_main_queue(), ^{
+		if(_activityIndicatorCount > 0) {
+			_activityIndicatorCount--;
+			
+			if(_activityIndicatorCount == 0) {
+				for (UIView *subview in [[topMostVisibleViewController view] subviews]) {
+					if ([subview isKindOfClass:[MBActivityIndicator class]]) {
+						[subview removeFromSuperview];
+					}
+				}
+			}
 		}
-	}
+	});
 }
 
 
@@ -576,13 +580,15 @@
     
     // If we have more than one viewController visible
     if (self.tabController) {
-        // Only set the selected tab if realy necessary; because it messes up the more navigation controller
-        NSInteger idx = _tabController.selectedIndex;
-        NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
-        
-        if(idx != shouldBe && shouldBe!=NSNotFound) {
-            [self.tabController setSelectedIndex:shouldBe];
-        }
+		 dispatch_async(dispatch_get_main_queue(), ^{
+			// Only set the selected tab if realy necessary; because it messes up the more navigation controller
+			NSInteger idx = _tabController.selectedIndex;
+			NSInteger shouldBe = [_tabController.viewControllers indexOfObject: dialogController.rootViewController];
+			
+			if(idx != shouldBe && shouldBe!=NSNotFound) {
+				[self.tabController setSelectedIndex:shouldBe];
+			}
+		});
     }
     
 }
