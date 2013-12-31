@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.itude.mobile.ios.mobbl</groupId>
 	<artifactId>mobbl-core-lib</artifactId>
-	<version>0.0.1.5</version>
+	<version>0.0.1.6-SNAPSHOT</version>
 	<packaging>xcode-lib</packaging>
 	<name>iOS Mobbl Core Lib</name>
 	<description>iOS Mobbl Core Library</description>
