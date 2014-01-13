@@ -31,8 +31,16 @@
 
 @interface MBSlidingMenuContentViewWrapper : UIViewController <MBContentViewWrapper>
 
+@property (nonatomic, assign) BOOL shouldShowMenu;
 
 -(void)addDelegate:(id<MBSlidingMenuDelegate>)delegate;
 -(void)removeDelegate:(id<MBSlidingMenuDelegate>)delegate;
+
+-(UIView*)getMenuView;
+
+- (BOOL)menuVisible;
+
+- (void)closeMenu;
+- (void)openMenu;
 
 @end
