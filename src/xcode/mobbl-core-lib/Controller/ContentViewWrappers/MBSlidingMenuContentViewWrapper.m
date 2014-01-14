@@ -90,46 +90,46 @@
 -(void)movePanel:(id)sender
 {
 	[[[(UITapGestureRecognizer*)sender view] layer] removeAllAnimations];
-
+    
 	CGPoint translatedPoint = [(UIPanGestureRecognizer*) sender translationInView:self.view];
 	CGPoint velocity = [(UIPanGestureRecognizer*)sender velocityInView:[sender view]];
-
+    
 	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateBegan) {
 		UIView *child = nil;
-
-		if (velocity.x > 0) {
-			child = [self getMenuView];
-			[self.view sendSubviewToBack:child];
-			[[sender view] bringSubviewToFront:[(UIPanGestureRecognizer *)sender view]];
-		}
+        
+        child = [self getMenuView];
+        [self.view sendSubviewToBack:child];
+        [[sender view] bringSubviewToFront:[(UIPanGestureRecognizer *)sender view]];
 	}
-
+    
 	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateEnded) {
-		if (!_shouldShowMenu) {
+		if (![self shouldShowMenu]) {
 			[self closeMenu];
-		} else if (_menuVisible) {
+		} else if ([self menuVisible]) {
 			[self openMenu];
 		}
 	}
-
+    
 	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateChanged) {
-		if (velocity.x < 0 && !_menuVisible) return;
-
+        
+        [(UIPanGestureRecognizer*)sender setTranslation:CGPointMake(0, 0) inView:self.view];
+        
+		if (velocity.x < 0 && ![self menuVisible]) return;
+        
         CGFloat newCenterX = [sender view].center.x + translatedPoint.x;
         CGFloat viewWidth = [sender view].frame.size.width;
         CGFloat newLeft = newCenterX - viewWidth / 2;
         if (newLeft < 0) newCenterX = viewWidth / 2;
-
-
-        if (!_shouldShowMenu && newLeft > viewWidth / 3) _shouldShowMenu = true;
-        else if (_shouldShowMenu && newLeft < (viewWidth / 2)) _shouldShowMenu = false;
+        
+        if (![self shouldShowMenu] && newLeft > viewWidth / 3) [self setShouldShowMenu:true];
+        else if ([self shouldShowMenu] && newLeft < (viewWidth / 2)) [self setShouldShowMenu:false];
         
 		[sender view].center = CGPointMake(newCenterX,	[sender view].center.y);
-		[(UIPanGestureRecognizer*)sender setTranslation:CGPointMake(0, 0) inView:self.view];
-
-
+        
+        
 	}
 }
+
 
 -(void)closeMenu {
 	[UIView animateWithDuration:SLIDING_TIME delay:0 options:UIViewAnimationOptionBeginFromCurrentState
