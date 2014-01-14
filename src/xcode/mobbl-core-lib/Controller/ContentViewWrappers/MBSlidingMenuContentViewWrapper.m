@@ -31,7 +31,6 @@
 
 @property (nonatomic, retain) UIViewController *mainController;
 @property (nonatomic, assign) BOOL menuVisible;
-@property (nonatomic, assign) BOOL shouldShowMenu;
 @property (nonatomic, retain) NSMutableArray *delegates;
 @property (nonatomic, retain) UIViewController *menuController;
 
@@ -116,9 +115,16 @@
 	if([(UIPanGestureRecognizer*) sender state] == UIGestureRecognizerStateChanged) {
 		if (velocity.x < 0 && !_menuVisible) return;
 
-		_shouldShowMenu = abs([sender view].center.x - [self mainController].view.frame.size.width / 2) > [self mainController].view.frame.size.width / 2;
+        CGFloat newCenterX = [sender view].center.x + translatedPoint.x;
+        CGFloat viewWidth = [sender view].frame.size.width;
+        CGFloat newLeft = newCenterX - viewWidth / 2;
+        if (newLeft < 0) newCenterX = viewWidth / 2;
 
-		[sender view].center = CGPointMake([sender view].center.x + translatedPoint.x,	[sender view].center.y);
+
+        if (!_shouldShowMenu && newLeft > viewWidth / 3) _shouldShowMenu = true;
+        else if (_shouldShowMenu && newLeft < (viewWidth / 2)) _shouldShowMenu = false;
+        
+		[sender view].center = CGPointMake(newCenterX,	[sender view].center.y);
 		[(UIPanGestureRecognizer*)sender setTranslation:CGPointMake(0, 0) inView:self.view];
 
 
