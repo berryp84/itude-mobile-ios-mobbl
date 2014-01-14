@@ -73,4 +73,9 @@
     
 }
 
+- (CGFloat)heightForField:(MBField *)field forParent:(UIView *)parent withMaxBounds:(CGRect)bounds {
+    // Returns 0 by default. Implement your own 
+    return 0;
+}
+
 @end

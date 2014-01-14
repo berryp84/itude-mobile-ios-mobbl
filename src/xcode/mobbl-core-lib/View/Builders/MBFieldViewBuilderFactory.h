@@ -27,6 +27,7 @@
 @property (nonatomic, retain) MBFieldViewBuilder *defaultBuilder;
 - (MBFieldViewBuilder*)builderForType:(NSString *)type withStyle:(NSString*)style;
 
--(UIView*) buildFieldView:(MBField*) field forParent:(UIView*)parent withMaxBounds:(CGRect) bounds;
+- (UIView*) buildFieldView:(MBField *)field forParent:(UIView *)parent withMaxBounds:(CGRect)bounds;
+- (CGFloat) heightForField:(MBField *)field forParent:(UIView *)parent withMaxBounds:(CGRect)bounds;
 
 @end

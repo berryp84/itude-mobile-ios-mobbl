@@ -147,5 +147,13 @@
     }
 }
 
+- (CGFloat) heightForField:(MBField *)field  forParent:(UIView *)parent withMaxBounds:(CGRect)bounds {
+    MBFieldViewBuilder* builder = [self builderForType:field.type withStyle:field.style];
+    if (builder) return [builder heightForField:field forParent:parent withMaxBounds:bounds];
+    else {
+        [NSException raise:@"BuilderNotFound" format:@"No builder found for type %@ and style %@", field.type, field.style];
+        return 0;
+    }
+}
 
 @end

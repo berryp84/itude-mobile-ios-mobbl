@@ -86,12 +86,20 @@
 -(CGFloat)heightForPanel:(MBPanel *)panel atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView
 {
     CGFloat height = 44;
+    UITableViewCell *cell = [self buildCellForRow:panel forTableView:tableView];
     
     // Loop through the fields in the row to determine the size of multiline text cells
     for(MBComponent *child in [panel children]){
         if ([child isKindOfClass:[MBField class]]) {
             MBField *field = (MBField *)child;
-            CGFloat childHight = [self.styleHandler heightForField:field forTableView:tableView];
+
+            CGFloat childHight = [[[MBViewBuilderFactory sharedInstance] fieldViewBuilderFactory] heightForField:field forParent:cell withMaxBounds:cell.bounds];
+            
+            // Fallback scenario (for backwards compatibility)
+            if (childHight == 0) {
+                childHight = [self.styleHandler heightForField:field forTableView:tableView];
+            }
+            
             
             if (childHight > height){
                 height = childHight;
