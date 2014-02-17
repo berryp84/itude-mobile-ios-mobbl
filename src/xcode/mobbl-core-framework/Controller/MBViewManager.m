@@ -155,7 +155,13 @@
         }
         
         MBDialogController *dialogController = [self.dialogManager dialogForPageStackName:page.pageStackName];
-        
+
+
+        // Show page on pageStack
+        MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
+        [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
+
+
         /** Show/present the dialogController if it is unvisible
          * NOTE: Comparing the activeDialogName does not work for initialOutcomes, because the MBFireInitialOutcomes activates the first pageStack by default.
          * Solution: Activate the first tab, and after that activate the modal (if it is the first controller to be activated */
@@ -167,11 +173,7 @@
         if (![page.pageStackName isEqualToString:self.dialogManager.activePageStackName]) {
             [self.dialogManager activatePageStackWithName:page.pageStackName];
         }
-        
-        // Show page on pageStack
-        MBPageStackController *pageStackController = [dialogController pageStackControllerWithName:page.pageStackName];
-        [pageStackController showPage:page displayMode:displayMode transitionStyle:transitionStyle];
-        
+
 	}
 }
 

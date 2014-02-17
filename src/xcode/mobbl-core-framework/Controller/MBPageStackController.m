@@ -48,6 +48,8 @@
 @property (nonatomic, assign, readonly) dispatch_semaphore_t navigationSemaphore;
 @property (nonatomic, assign) BOOL needsRelease;
 
+@property (nonatomic, assign) BOOL markedForReset;
+
 -(void) clearSubviews;
 
 @end
@@ -86,6 +88,7 @@
 		[self showActivityIndicator];
 		_navigationSemaphore = dispatch_semaphore_create(1);
 		self.needsRelease = false;
+		self.markedForReset = true;
         [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.navigationController.navigationBar];
 	}
 	return self;
@@ -127,12 +130,20 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
 		dispatch_async(dispatch_get_main_queue(), ^{
+
 			// Apply transitionStyle for a regular page navigation
 			id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
 			[style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
 
 			[viewController autorelease];
 			self.needsRelease = true;
+
+
+			if (self.markedForReset) {
+				self.navigationController.viewControllers = [NSArray arrayWithObject:viewController];
+				self.markedForReset = false;
+			} else {
+
 
 			// Replace the last page on the stack
 			if([displayMode isEqualToString:@"REPLACE"]) {
@@ -143,6 +154,7 @@
 			// Regular navigation to new page
 			else {
 				[nav pushViewController:viewController animated:[style animated]];
+			}
 			}
 			
 			// This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
@@ -278,7 +290,8 @@
 
 - (void)resetView {
     // Manually reset the viewControllers array because that's the only way to remove the rootViewController
-    self.navigationController.viewControllers = [NSArray array];
+    //self.navigationController.viewControllers = [NSArray array];
+	self.markedForReset = true;
 }
 
 // This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
