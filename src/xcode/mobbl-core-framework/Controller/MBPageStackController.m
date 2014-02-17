@@ -88,7 +88,7 @@
 		[self showActivityIndicator];
 		_navigationSemaphore = dispatch_semaphore_create(1);
 		self.needsRelease = false;
-		self.markedForReset = true;
+		self.markedForReset = true; 
         [[[MBViewBuilderFactory sharedInstance] styleHandler] styleNavigationBar:self.navigationController.navigationBar];
 	}
 	return self;
@@ -127,22 +127,21 @@
 
 	viewController.pageStackController = self;
 
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
-		dispatch_async(dispatch_get_main_queue(), ^{
 
-			// Apply transitionStyle for a regular page navigation
-			id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
-			[style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
+	void (^actuallyShowPage)(void) =^{
 
-			[viewController autorelease];
-			self.needsRelease = true;
+		// Apply transitionStyle for a regular page navigation
+		id<MBTransitionStyle> style = [[[MBApplicationFactory sharedInstance] transitionStyleFactory] transitionForStyle:transitionStyle];
+		[style applyTransitionStyleToViewController:nav forMovement:MBTransitionMovementPush];
+
+		[viewController autorelease];
+		self.needsRelease = true;
 
 
-			if (self.markedForReset) {
-				self.navigationController.viewControllers = [NSArray arrayWithObject:viewController];
-				self.markedForReset = false;
-			} else {
+		if (self.markedForReset) {
+			self.navigationController.viewControllers = [NSArray arrayWithObject:viewController];
+			self.markedForReset = false;
+		} else {
 
 
 			// Replace the last page on the stack
@@ -150,19 +149,38 @@
 				[nav replaceLastViewController:viewController];
 				return;
 			}
-			
+
 			// Regular navigation to new page
 			else {
 				[nav pushViewController:viewController animated:[style animated]];
 			}
-			}
-			
-			// This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
-			[self setupCloseButtonForPage:page];
-		});
-		});
+		}
 
-    
+		// This needs to be done after the page (viewController) is visible, because before that we have nothing to set the close button to
+		[self setupCloseButtonForPage:page];
+	};
+
+
+	/* This is where stuff gets tricky; it is possible that a navigation animation is playing (usually because a page is being popped)
+		while is showPage-call is made. In that case, we want to wait until that animation has finished, because iOS shows weird behaviour if not.
+	   However, when no animation is being played, the showing of the page should be queued in the main thread immediately.
+	 
+	   To this end, we have the navigation semaphore, which is claimed as soon as animation is performed, and released after the animation has finished playing.
+	   If the semaphore is available when we arrive here, no animation is being played, so we can queue actuallyShowPage immediately.
+	   If the semaphore is unavailable, a task in a separate queue is started, that waits for the semaphore to become available, which then queues actuallyShowPage
+	 */
+	if (!dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_NOW)) // dispatch_semaphore_wait returns 0 on success..
+	{
+		// yay, we immediately got the semaphore, so we can dispatch the showing of the page in the expected order
+		dispatch_async(dispatch_get_main_queue(), actuallyShowPage);
+	} else {
+		// we don't have the semaphore, so wait for it in a different queue
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+			dispatch_semaphore_wait(self.navigationSemaphore, DISPATCH_TIME_FOREVER);
+			// yay, semaphore; dispatch actuallyShowPage
+			dispatch_async(dispatch_get_main_queue(), actuallyShowPage);
+		});
+    }
 }
 
 -(void)popPageWithTransitionStyle:(NSString *)transitionStyle animated:(BOOL)animated
@@ -290,7 +308,7 @@
 
 - (void)resetView {
     // Manually reset the viewControllers array because that's the only way to remove the rootViewController
-    //self.navigationController.viewControllers = [NSArray array];
+	self.navigationController.viewControllers = [NSArray array];
 	self.markedForReset = true;
 }
 
