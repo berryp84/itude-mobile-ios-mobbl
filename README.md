@@ -14,7 +14,7 @@ Documentation about how to get started can be [here](http://mobbl.org/ios.html).
 For Api documentation, see the [iOS API Reference](http://mobbl.org/apis/ios/index.html).
 
 ## [Changelog](https://github.com/ItudeMobile/itude-mobile-ios-mobbl-framework/wiki/Changelog)
-Current version: 0.0.2.7
+Current version: 0.0.2.8
 
 ## Build
 #### Maven
