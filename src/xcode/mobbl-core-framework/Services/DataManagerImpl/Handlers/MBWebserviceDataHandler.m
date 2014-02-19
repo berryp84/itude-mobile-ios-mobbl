@@ -87,6 +87,11 @@
 	return [self loadFreshDocument:documentName withArguments:doc];
 }
 
+-(MBDocument *) loadFreshDocument:(NSString *)documentName{
+	MBDocument *result = [self loadFreshDocument:documentName withArguments:nil];
+	return result;
+}
+
 -(MBDocument *) loadFreshDocument:(NSString *)documentName withArguments:(MBDocument *)doc{
     MBDocument *reformattedArgs = [self reformatRequestArgumentsForServer:doc];
 	[self addAttributesToRequestArguments:reformattedArgs];

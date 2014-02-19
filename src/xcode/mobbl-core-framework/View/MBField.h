@@ -75,6 +75,7 @@
 // for financial apps
 - (NSString *) forceUSDecimalSeparatorWithValue:(NSString *)inputString;
 
+- (void)textFieldDoneEditing:(UITextField *)textField;
 	
 
 @end
