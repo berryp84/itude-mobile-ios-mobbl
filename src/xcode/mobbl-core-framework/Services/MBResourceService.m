@@ -50,7 +50,7 @@ static MBResourceService *_instance = nil;
     if (_config == nil){
         MBResourceConfigurationParser *parser = [[MBResourceConfigurationParser alloc]init];
         NSData *data = [_instance.fileManager dataWithContentsOfMainBundle: RESOURCE_CONFIG_FILE_NAME];
-        _config = [parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME];
+        _config = [[parser parseData:data ofDocument: RESOURCE_CONFIG_FILE_NAME] retain];
         [parser release];
     }
     return _config;
