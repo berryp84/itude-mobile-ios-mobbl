@@ -16,6 +16,7 @@
 
 #import "MBDocument.h"
 #import "MBDocumentDefinition.h"
+#import "MBDocumentParser.h"
 
 #define PARSER_XML @"XML"
 #define PARSER_JSON @"JSON"
@@ -25,7 +26,12 @@
     NSMutableDictionary *_registeredDocumentParsers;
 }
 
+/// @name Getting a MBDocumentFactory instance
 + (MBDocumentFactory *) sharedInstance;
+
+/// @name Registering MBDocumentParser instances
+- (void) registerDocumentParser:(id<MBDocumentParser>) parser withName:(NSString*) name;
+- (id <MBDocumentParser>) parserForType:(NSString *)type;
 
 - (MBDocument*) documentWithData:(NSData *)data withType:(NSString*)type andDefinition: (MBDocumentDefinition*) definition;
 	
