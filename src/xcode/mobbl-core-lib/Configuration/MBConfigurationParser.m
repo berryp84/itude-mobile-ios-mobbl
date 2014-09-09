@@ -28,23 +28,30 @@
 }
 
 - (id) parseData:(NSData*)data ofDocument:(NSString*) documentName {
-	self.documentName = documentName;
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-    [parser setDelegate:self];
-	
-	_stack = [[NSMutableArray alloc] init];
-	_characters = nil;
-	if([parser parse] == NO) {
-		NSError *error = [parser parserError];
-		@throw [NSException exceptionWithName:@"ParseError" reason: [error description] userInfo:nil];
-	}
-
-	id config = [[_stack lastObject] retain];
-	[_stack release];
-	[_characters release];
-	
-	[parser release];
-	return [config autorelease];
+    self.documentName = documentName;
+    
+    _stack = [[NSMutableArray alloc] init];
+    _characters = nil;
+    
+    // IMPORTANT FIX FOR IOS8
+    // http://stackoverflow.com/questions/25363560/ios8-nsxmlparser-crash
+    dispatch_queue_t reentrantAvoidanceQueue = dispatch_queue_create("reentrantAvoidanceQueue", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(reentrantAvoidanceQueue, ^{
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+        [parser setDelegate:self];
+        if([parser parse] == NO) {
+            NSError *error = [parser parserError];
+            @throw [NSException exceptionWithName:@"ParseError" reason: [error description] userInfo:nil];
+        }
+        [parser release];
+    });
+    dispatch_sync(reentrantAvoidanceQueue, ^{ });
+    
+    id config = [[_stack lastObject] retain];
+    [_stack release];
+    [_characters release];
+    
+    return [config autorelease];
 }
 
 - (void) notifyProcessed:(id) object usingSelector:(SEL) selector {
