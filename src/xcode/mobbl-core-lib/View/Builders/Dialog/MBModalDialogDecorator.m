@@ -43,9 +43,9 @@
 
     UIViewController *topMostVisibleViewController = [[[MBApplicationController currentInstance] viewManager] topMostVisibleViewController];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [[[MBApplicationController currentInstance] viewManager] presentViewController:viewController fromViewController:topMostVisibleViewController animated:animated];
-    });
+    //});
     
     // Store the pageStackName of tge pageStack that was visible before this modal is presented
     self.originPageStackName =  [[[[MBApplicationController currentInstance] viewManager] dialogManager] activePageStackName];
