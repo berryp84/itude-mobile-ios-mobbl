@@ -165,7 +165,7 @@
 - (void)presentWithSuperview:(UIView *)superview {
 	
     // set initial location at bottom of superview
-    CGRect r = self.view.frame;
+    CGRect r = superview.frame;
     r.origin = CGPointMake(0.0, superview.bounds.size.height);
     self.view.frame = r;
 	
